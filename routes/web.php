@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 use Inertia\Inertia;
@@ -15,3 +16,5 @@ Route::get('/login', [AuthController::class, 'showLoginForm']);
 Route::get('/register', [AuthController::class, 'showRegisterForm']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::resource('movies', MovieController::class);

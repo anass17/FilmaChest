@@ -16,6 +16,12 @@ class AuthController extends Controller
         return Inertia::render('Register');
     }
 
+    // Show Login Form
+
+    public function showLoginForm() {
+        return Inertia::render('Login', ['errors' => '']);
+    }
+
     // Register a new User
 
     public function register(Request $request) {
@@ -41,9 +47,26 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         // Store token in a secure cookie
-        cookie('auth_token', $token, 60*24, null, null, false, true, false, 'Strict');
+        $cookie = cookie('auth_token', $token, 60*24, null, null, false, true, false, 'Strict');
 
-        return Inertia::render('Movies');
+        return redirect()->route('movies.index')->withCookie($cookie);
 
+    }
+
+    // Log user into its account
+
+    public function login(Request $request) {
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && Hash::check($request -> password, $user -> password)) {
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            $cookie = cookie('auth_token', $token, 60*24, null, null, false, true, false, 'Strict');
+
+            return redirect()->route('movies.index')->withCookie($cookie);
+        }
+        
+        return Inertia::render('Login', ['errors' => 'Incorrect email or password']);
     }
 }
