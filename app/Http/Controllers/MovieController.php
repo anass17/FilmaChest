@@ -6,6 +6,8 @@ use App\Models\Movie;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+use function Termwind\render;
+
 class MovieController extends Controller
 {
     /**
@@ -35,9 +37,9 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
-        //
+        return Inertia::render('Movie');
     }
 
     /**
