@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react"
 import { Inertia } from '@inertiajs/inertia';
+import { Link } from "@inertiajs/inertia-react";
 
 export default function Register({errors}) {
 
@@ -56,7 +57,7 @@ export default function Register({errors}) {
                     </div>
                     <div className="flex justify-between items-center mt-6">
                         <button type="submit" className="w-full max-w-40 py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm cursor-pointer font-medium text-white bg-[#FC684D] hover:bg-[#FF5F2A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FC684D]">Register</button>
-                        <a href="/login">You have an account?</a>
+                        <Link href="/login">You have an account?</Link>
                     </div>
                 </form>
             </div>
