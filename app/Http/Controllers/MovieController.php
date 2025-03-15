@@ -6,6 +6,7 @@ use App\Models\Movie;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+use function Laravel\Prompts\error;
 use function Termwind\render;
 
 class MovieController extends Controller
@@ -23,7 +24,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('AddMovie');
     }
 
     /**
@@ -31,7 +32,40 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:150',
+            'description' => 'required|string|max:255',
+            'category' => 'required|string|exists:categories,id',
+            'year' => 'required|integer|min:1950',
+            'country' => 'required|string',
+            'duration' => 'required|string|regex:/^[0-9]:[0-5][0-9]$/',
+            'thumbnail' => 'required|file|mimes:jpg,png,jpeg,webp|max:3096',
+        ]);
+
+        if ($request->hasFile('thumbnail') && $request->file('thumbnail')->isValid()) {
+            $file = $request->file('thumbnail');
+
+            $filename = 'thumbnail_' . time() . '.' . $file->getClientOriginalExtension();
+
+            $file->storeAs('public/uploads', $filename);
+
+        } else {
+            return Inertia::render('AddMovie', ['errors' => ['thumbnail' => 'Could not upload the image']]);
+        }
+
+        $movie = new Movie();
+
+        $movie -> title = $request -> title;
+        $movie -> description = $request -> description;
+        $movie -> category_id = $request -> category;
+        $movie -> year = $request -> year;
+        $movie -> country = $request -> country;
+        $movie -> duration = $request -> duration;
+        $movie -> thumbnail = $filename;
+
+        $movie -> save();
+
+        return Inertia::render('Movies');
     }
 
     /**
