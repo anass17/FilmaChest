@@ -1,1 +1,15 @@
 @import 'tailwindcss';
+
+body {
+    background-color: #00061d;
+}
+
+.container-xl {
+    max-width: 1350px;
+    padding: 0 0.75rem;
+    margin: auto;
+}
+
+button[type=button] {
+    cursor: pointer;
+}
