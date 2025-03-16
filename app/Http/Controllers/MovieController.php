@@ -17,8 +17,11 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies = Movie::with('category')->get();
-        return Inertia::render('Movies', ['movies' => $movies]);
+        $categories = Category::all();
+
+        $movies = Movie::with('category')->orderBy('created_at', 'desc')->get();
+
+        return Inertia::render('Movies', ['movies' => $movies, 'categories' => $categories]);
     }
 
     /**
@@ -132,7 +135,7 @@ class MovieController extends Controller
     */
 
     public function list() {
-        $movies = Movie::all();
+        $movies = Movie::orderBy('created_at', 'desc')->get();
 
         return Inertia::render('MoviesAdminView', ['movies' => $movies]);
     }

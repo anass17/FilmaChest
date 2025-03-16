@@ -1,7 +1,26 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "@inertiajs/inertia-react";
 
 export default function Navbar() {
+
+    let [moviesList, setMoviesList] = useState([]);
+    let [filters, setFilters] = useState({search: ''});
+
+    useEffect(() => {
+        if (filters.search !== '') {
+            fetch(`/api/movies?search=${filters.search}`)
+            .then(response => response.json())
+            .then(data => setMoviesList(data.movies));
+        }
+    }, [filters]);
+
+    function handleKeyUp(e) {
+        e.preventDefault();
+
+        setFilters({
+            search: e.target.value
+        })
+    }
 
     let userMenu;
 
@@ -29,13 +48,13 @@ export default function Navbar() {
     }
 
     return (
-        <header className="bg-[#4a5565]">
+        <header className="bg-gray-700">
             <div className="flex justify-between container items-center py-3 max-w-[1250px] mx-auto text-white h-18">
                 <Link href="/movies" className="font-semibold text-2xl"><span className="text-[#FF5F2A]">Filma</span>Chest</Link>
-                <div className="w-full max-w-sm min-w-[200px]">
+                <div className="w-full max-w-sm min-w-[200px] relative">
                     <div className="relative">
-                        <input id="movies-search" className="peer w-full bg-transparent placeholder:text-gray-100 text-white text-sm border border-slate-400 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none shadow-sm focus:shadow"/>
-                        <label htmlFor="movies-search" className="absolute cursor-text bg-[#4a5565] px-1 left-2.5 top-2.5 text-slate-300 text-sm transition-all transform origin-left peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-slate-400 peer-focus:scale-90">
+                        <input id="movies-search" autoComplete="off" onKeyUp={handleKeyUp} className="peer w-full bg-transparent placeholder:text-gray-100 text-white text-sm border border-slate-400 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none shadow-sm focus:shadow"/>
+                        <label htmlFor="movies-search" className="absolute cursor-text bg-gray-700 px-1 left-2.5 top-2.5 text-slate-300 text-sm transition-all transform origin-left peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-slate-400 peer-focus:scale-90">
                             Search for ...
                         </label>
                         <div className="absolute right-1 top-1 p-1 rounded text-center text-sm text-white">
@@ -44,16 +63,51 @@ export default function Navbar() {
                             </svg>
                         </div>
                     </div>
+                    {
+                        filters.search !== '' &&
+                        <div id="search-result" className="max-h-60 overflow-auto custom-scroll absolute w-full left-0 -bottom-6 translate-y-full py-3 px-3 z-50 bg-gray-700 rounded">
+                            <div className="flex flex-col">
+                                {
+                                    moviesList.map((item, index) => {
+                                        return (
+                                            <Link key={index} href={"/movies/" + item.id} className="hover:bg-gray-600 rounded transition flex gap-4 w-full items-center py-2 px-3">
+                                                <div className="w-12 h-12 rounded bg-cover bg-center" style={{ backgroundImage: `url('/storage/uploads/${item.thumbnail}')` }}></div>
+                                                <div>
+                                                    <h4 className="mb-0.5">{item.title}</h4>
+                                                    <div className="flex gap-4">
+                                                        <div className="flex gap-2 items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 fill-slate-400" viewBox="0 0 576 512">
+                                                                {/* <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
+                                                                <path d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z"/>
+                                                            </svg>
+                                                            <span className="text-sm text-slate-300 font-medium">{item.category.name}</span>
+                                                        </div>
+                                                        <div className="flex gap-2 items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 fill-slate-400" viewBox="0 0 448 512">
+                                                                {/* <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}
+                                                                <path d="M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272z"/>
+                                                            </svg>
+                                                            <span className="text-sm text-slate-300 font-medium">{item.year}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                    }
                 </div>
                 <nav className="flex justify-center items-center gap-5">
                     <Link href="/movies">Movies</Link>
-                    <button type="button" onClick={toggleUserMenu} class="cursor-pointer">User Name</button>
+                    <button type="button" onClick={toggleUserMenu} className="cursor-pointer">User Name</button>
                     <div className="relative">
                         <button type="button" onClick={toggleUserMenu} id="user-profile-picture" className="cursor-pointer block w-11 h-11 bg-white rounded-full border-2 border-[#FF5F2A] overflow-hidden">
                             <img src="" className="w-full" />
                         </button>
-                        <div id="user-menu" className="absolute -right-5 -bottom-5 translate-y-full min-w-48 hidden">
-                            <div className="bg-[#4a5565] flex flex-col gap-3 w-full rounded-md py-4 px-5">
+                        <div id="user-menu" className="absolute z-30 -right-5 -bottom-5 translate-y-full min-w-48 hidden">
+                            <div className="bg-gray-700 flex flex-col gap-3 w-full rounded-md py-4 px-5">
                                 <Link href="/profile" className="flex gap-2 items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="fill-white" width="16" height="16" viewBox="0 0 448 512">
                                     {/* <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--> */}

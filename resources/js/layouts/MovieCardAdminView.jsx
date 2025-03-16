@@ -17,23 +17,23 @@ export default function MovieCardAdminView({movie}) {
         <>
             {showModal && (
                 <div
-                    class="fixed z-[50] grid h-screen w-screen top-0 left-0 place-items-center bg-[#00000040] backdrop-blur-[2px]"
+                    className="fixed z-[50] grid h-screen w-screen top-0 left-0 place-items-center bg-[#00000040] backdrop-blur-[2px]"
                 >
                     <div
-                        class="relative m-4 p-4 w-2/5 min-w-[40%] max-w-[40%] rounded-lg bg-gray-700 shadow-sm"
+                        className="relative m-4 p-4 w-2/5 min-w-[40%] max-w-[40%] rounded-lg bg-gray-700 shadow-sm"
                     >
-                        <div class="flex shrink-0 items-center pb-4 text-xl font-medium text-slate-400">
+                        <div className="flex shrink-0 items-center pb-4 text-xl font-medium text-slate-400">
                             Confirm Delete
                         </div>
-                        <div class="relative border-t border-slate-200 py-4 leading-normal text-gray-200 font-light">
-                            <p class="mb-3">Are you sure you want to delete this movie?</p>
+                        <div className="relative border-t border-slate-200 py-4 leading-normal text-gray-200 font-light">
+                            <p className="mb-3">Are you sure you want to delete this movie?</p>
                             <b>{movie.title}</b>
                         </div>
-                        <div class="flex shrink-0 flex-wrap items-center pt-4 justify-end">
-                            <button onClick={() => setShowModal(false)} class="rounded-md border border-transparent py-2 px-4 text-center text-sm transition-all text-slate-200 hover:text-white" type="button">
+                        <div className="flex shrink-0 flex-wrap items-center pt-4 justify-end">
+                            <button onClick={() => setShowModal(false)} className="rounded-md border border-transparent py-2 px-4 text-center text-sm transition-all text-slate-200 hover:text-white" type="button">
                                 Cancel
                             </button>
-                            <button onClick={handleClick} class="rounded-md bg-red-500 hover:bg-red-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg ml-2" type="button">
+                            <button onClick={handleClick} className="rounded-md bg-red-500 hover:bg-red-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg ml-2" type="button">
                                 Confirm
                             </button>
                         </div>
@@ -41,12 +41,12 @@ export default function MovieCardAdminView({movie}) {
                 </div>
             )}
 
-            <div class="relative grid max-w-lg flex-col items-center justify-center overflow-hidden rounded-lg bg-white min-h-48 group movie-card-view">
-                <div class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-cover bg-center grayscale-50 group-hover:grayscale-0 transition-all group-hover:scale-125" style={{backgroundImage: `url('/storage/uploads/${movie.thumbnail}')`}}>
-                    <div class="to-bg-black-10 absolute inset-0 h-full w-full bg-black opacity-75 group-hover:opacity-25 transition-all"></div>
+            <div className="relative grid max-w-lg flex-col items-center justify-center overflow-hidden rounded-lg bg-white min-h-48 group movie-card-view">
+                <div className="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-cover bg-center grayscale-50 group-hover:grayscale-0 transition-all group-hover:scale-125" style={{backgroundImage: `url('/storage/uploads/${movie.thumbnail}')`}}>
+                    <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-black opacity-75 group-hover:opacity-25 transition-all"></div>
                 </div>
-                <div class="relative text-center p-6 px-6 py-14 md:px-12">
-                    <h2 class="text-xl font-medium text-white group-hover:opacity-0">
+                <div className="relative text-center p-6 px-6 py-14 md:px-12">
+                    <h2 className="text-xl font-medium text-white group-hover:opacity-0">
                         {movie.title}
                     </h2>
                     <div className="gap-3 justify-center flex absolute top-0 items-center left-0 w-full h-full buttons">

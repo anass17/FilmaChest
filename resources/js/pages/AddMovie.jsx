@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../layouts/navbar";
+import Navbar from "../layouts/Navbar";
 import SideMenu from "../layouts/SideMenu";
 import { Inertia } from "@inertiajs/inertia";
 

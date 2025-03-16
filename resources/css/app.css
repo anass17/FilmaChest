@@ -22,3 +22,11 @@ button[type=button] {
 .movie-card-view:hover .buttons {
     opacity: 1;
 }
+
+.custom-scroll::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #FF5F2A;
+}

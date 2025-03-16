@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../layouts/navbar";
+import Navbar from "../layouts/Navbar";
 import SideMenu from "../layouts/SideMenu";
 import { Inertia } from "@inertiajs/inertia";
 
@@ -120,7 +120,7 @@ export default function AddMovie({errors, movie}) {
                         </div>
                         <div className="mt-5">
                             <div className="mb-3">
-                                <div class="h-[200px] rounded bg-cover bg-center" style={{backgroundImage: `url('/storage/uploads/${movie.thumbnail}')`}}>
+                                <div className="h-[200px] rounded bg-cover bg-center" style={{backgroundImage: `url('/storage/uploads/${movie.thumbnail}')`}}>
                                 </div>
                             </div>
                         </div>
