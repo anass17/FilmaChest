@@ -17,7 +17,8 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Movies');
+        $movies = Movie::with('category')->get();
+        return Inertia::render('Movies', ['movies' => $movies]);
     }
 
     /**
@@ -75,7 +76,9 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        return Inertia::render('Movie');
+        $movie = Movie::with('category')->find($id);
+
+        return Inertia::render('Movie', ['movie' => $movie]);
     }
 
     /**

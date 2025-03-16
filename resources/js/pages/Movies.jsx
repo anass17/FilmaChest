@@ -3,7 +3,7 @@ import Navbar from "../layouts/navbar";
 import MovieCard from "../layouts/MovieCard";
 import Pagination from "../layouts/Pagination";
 
-export default function Movies() {
+export default function Movies({movies}) {
 
     return (
         <>
@@ -50,10 +50,13 @@ export default function Movies() {
                         </div>
                     </div>
                     <div className="grid grid-cols-3 gap-5">
-                        <MovieCard />
-                        <MovieCard />
-                        <MovieCard />
-                        <MovieCard />
+                        {
+                            movies.map((item, index) => {
+                                return (
+                                    <MovieCard key={index} movie={item} />
+                                )
+                            })
+                        }
                     </div>
                     <Pagination />
                 </div>
