@@ -22,4 +22,4 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('movies', MovieController::class);
-Route::get('list', [MovieController::class, 'list']);
+Route::get('list', [MovieController::class, 'list'])->name('list');

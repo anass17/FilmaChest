@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -24,7 +25,8 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return Inertia::render('AddMovie');
+        $categories = Category::all();
+        return Inertia::render('AddMovie', ['categories' => $categories]);
     }
 
     /**
@@ -115,10 +117,16 @@ class MovieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Movie $movie)
-    {
-        //
+    public function destroy($id) {
+
+        Movie::destroy($id);
+
+        return redirect()->route('list');
     }
+
+    /**
+     * List all movies to take action: update or delete
+    */
 
     public function list() {
         $movies = Movie::all();
