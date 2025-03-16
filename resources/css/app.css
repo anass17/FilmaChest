@@ -15,3 +15,10 @@ body {
 button[type=button] {
     cursor: pointer;
 }
+
+.movie-card-view .buttons {
+    opacity: 0;
+}
+.movie-card-view:hover .buttons {
+    opacity: 1;
+}

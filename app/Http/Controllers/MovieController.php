@@ -47,7 +47,7 @@ class MovieController extends Controller
 
             $filename = 'thumbnail_' . time() . '.' . $file->getClientOriginalExtension();
 
-            $file->storeAs('public/uploads', $filename);
+            $file->storeAs('uploads', $filename, 'public');
 
         } else {
             return Inertia::render('AddMovie', ['errors' => ['thumbnail' => 'Could not upload the image']]);
@@ -79,9 +79,10 @@ class MovieController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Movie $movie)
+    public function edit($id)
     {
-        //
+        $movie = Movie::with('category')->findOrFail($id);
+        return Inertia::render('EditMovie', ['movie' => $movie]);
     }
 
     /**
@@ -89,7 +90,26 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        //
+
+        $request->validate([
+            'title' => 'required|string|max:150',
+            'description' => 'required|string|max:255',
+            'category' => 'required|string|exists:categories,id',
+            'year' => 'required|integer|min:1950',
+            'country' => 'required|string',
+            'duration' => 'required|string|regex:/^[0-9]:[0-5][0-9]$/',
+        ]);
+
+        $movie -> title = $request -> title;
+        $movie -> description = $request -> description;
+        $movie -> category_id = $request -> category;
+        $movie -> year = $request -> year;
+        $movie -> country = $request -> country;
+        $movie -> duration = $request -> duration;
+
+        $movie -> save();
+
+        return Inertia::render('Movies');
     }
 
     /**
@@ -98,5 +118,11 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         //
+    }
+
+    public function list() {
+        $movies = Movie::all();
+
+        return Inertia::render('MoviesAdminView', ['movies' => $movies]);
     }
 }

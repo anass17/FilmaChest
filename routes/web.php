@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
+
 
 use Inertia\Inertia;
 
@@ -20,3 +22,4 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('movies', MovieController::class);
+Route::get('list', [MovieController::class, 'list']);
