@@ -40,7 +40,7 @@ export default function AddMovie({errors, user}) {
                 <div className="py-12 flex-1 px-10">
                     <form onSubmit={handleSubmit} className="mx-auto max-w-lg">
                         <h1 className="mb-12 text-4xl font-semibold">Profile</h1>
-                        <div className="flex gap-3">
+                        <div className="flex gap-x-3 flex-col md:flex-row">
                             <div className="mb-4 flex-1">
                                 <label htmlFor="first_name" className="block text-sm font-medium text-slate-200">First Name</label>
                                 <input type="text" id="first_name" name="first_name" value={data.first_name} onChange={handleChange} placeholder="Add First Name" className={update == true ? "mt-1 block w-full px-3 py-2 border placeholder:text-slate-400 text-slate-200 border-gray-500 rounded bg-gray-700 shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" : 'outline-none mt-1 pl-2 text-slate-400'} disabled={update == false ? 'disabled' : ''} />

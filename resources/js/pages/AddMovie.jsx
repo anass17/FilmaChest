@@ -66,7 +66,7 @@ export default function AddMovie({errors, categories}) {
 
                 <SideMenu activeLink={2} />
                 
-                <div className="py-12 flex-1 px-10">
+                <div className="py-12 flex-1 px-4 md:px-10">
                     <h1 className="mb-8 text-4xl font-semibold text-center">Add New Movie</h1>
                     <form  onSubmit={handleSubmit} className="mx-auto max-w-xl">
                         <div className="mb-3">
@@ -84,7 +84,7 @@ export default function AddMovie({errors, categories}) {
                                 <label htmlFor="category" className="block text-sm font-medium mb-1">Category</label>
                                 <div className="relative">
                                     <select
-                                        name="category" id="category" value={data.category} onChange={handleChange} className="w-full bg-gray-700 placeholder:text-slate-300 text-slate-300 text-sm border border-gray-500 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] shadow-sm focus:shadow-md appearance-none cursor-pointer">
+                                        name="category" id="category" value={data.category} onChange={handleChange} className="w-full bg-gray-700 placeholder:text-slate-300 text-slate-300 sm:text-sm border border-gray-500 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] shadow-sm focus:shadow-md appearance-none cursor-pointer">
                                         <option value="">Select</option>
                                         {
                                             categories.map((item, index) => {
@@ -111,7 +111,7 @@ export default function AddMovie({errors, categories}) {
                                 <label htmlFor="country" className="block text-sm font-medium mb-1">Country</label>
                                 <div className="relative">
                                     <select
-                                        name="country" id="country" onChange={handleChange} value={data.country} className="w-full bg-gray-700 placeholder:text-slate-300 text-slate-300 text-sm border border-gray-500 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] shadow-sm focus:shadow-md appearance-none cursor-pointer">
+                                        name="country" id="country" onChange={handleChange} value={data.country} className="w-full bg-gray-700 placeholder:text-slate-300 text-slate-300 sn:text-sm border border-gray-500 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] shadow-sm focus:shadow-md appearance-none cursor-pointer">
                                         <option value="">Select</option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Argentina">Argentina</option>

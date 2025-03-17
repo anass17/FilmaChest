@@ -44,9 +44,9 @@ export default function Login({errors}) {
 
     return (
         <>
-            <div className="mx-auto h-screen relative flex justify-center items-center bg-[url('/public/imgs/bg.jpg')] bg-cover bg-center">
+            <div className="mx-auto h-screen relative flex justify-center items-center px-3 bg-[url('/public/imgs/bg.jpg')] bg-cover bg-center">
                 <div className="w-full h-full absolute top-0 left-0 bg-black opacity-75"></div>
-                <form onSubmit={handleSubmit} className="space-y-4 w-full relative z-10 max-w-lg bg-[#4a5565DD] text-white rounded-lg py-7 px-9 shadow-md">
+                <form onSubmit={handleSubmit} className="space-y-4 w-full relative z-10 max-w-lg bg-[#4a5565DD] text-white rounded-lg py-7 px-5 md:px-9 shadow-md">
                     <h1 className="text-2xl font-bold mb-8 text-center text-[#FF5F2A]">Access Your Account</h1>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-slate-200">Email</label>

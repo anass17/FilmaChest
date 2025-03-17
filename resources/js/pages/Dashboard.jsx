@@ -13,7 +13,7 @@ export default function Dashboard({stats, recentAdded}) {
 
                 <SideMenu activeLink={1} />
                 
-                <div className="py-12 flex-1 px-10">
+                <div className="py-12 flex-1 px-4 md:px-10">
                     <h1 className="mb-8 text-4xl font-semibold text-center">Dashboard</h1>
                     <div className="grid grid-cols-2 gap-5 *:rounded-md *:bg-gray-800 max-w-xl *:py-5 *:px-7 mb-16 mx-auto">
                         <div className="border border-gray-700">
@@ -39,7 +39,7 @@ export default function Dashboard({stats, recentAdded}) {
                     </div>
                     <div className="mx-auto">
                         <h2 className="text-center font-semibold text-xl mb-7">Recently Added</h2>
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 justify-self-center">
 
                             {
                                 recentAdded.map((item, index) => {

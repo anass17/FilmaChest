@@ -30,7 +30,7 @@ export default function Movies({movies, categories}) {
             <div className="text-white py-10">
                 <div className="container-xl">
                     <h1 className="mb-8 text-center text-3xl font-semibold">List of Movies</h1>
-                    <div className="flex justify-between mb-10">
+                    <div className="flex justify-between mb-10 flex-col md:flex-row gap-3 items-center">
                         <div id="Search-input" className="w-full max-w-sm min-w-[200px]">
                             <div className="relative flex items-center">
                             
@@ -68,7 +68,7 @@ export default function Movies({movies, categories}) {
                             </div>
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                         {
                             moviesList &&
                             moviesList.map((item, index) => {

@@ -50,10 +50,10 @@ export default function Navbar() {
     }
 
     return (
-        <header className="bg-gray-700">
+        <header className="bg-gray-700 px-3">
             <div className="flex justify-between container items-center py-3 max-w-[1250px] mx-auto text-white h-18">
                 <Link href="/movies" className="font-semibold text-2xl"><span className="text-[#FF5F2A]">Filma</span>Chest</Link>
-                <div className="w-full max-w-sm min-w-[200px] relative">
+                <div className="w-full hidden md:block max-w-72 lg:max-w-sm min-w-[200px] relative">
                     <div className="relative">
                         <input id="movies-search" autoComplete="off" onKeyUp={handleKeyUp} className="peer w-full bg-transparent placeholder:text-gray-100 text-white text-sm border border-slate-400 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none shadow-sm focus:shadow"/>
                         <label htmlFor="movies-search" className="absolute cursor-text bg-gray-700 px-1 left-2.5 top-2.5 text-slate-300 text-sm transition-all transform origin-left peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-slate-400 peer-focus:scale-90">
@@ -108,7 +108,7 @@ export default function Navbar() {
                         <button type="button" onClick={toggleUserMenu} id="user-profile-picture" className="cursor-pointer block w-10 h-10 bg-white rounded-full border-2 border-[#FF5F2A] overflow-hidden">
                             <img src="/imgs/user.webp" className="w-full" />
                         </button>
-                        <div id="user-menu" className="absolute z-30 -right-5 -bottom-5 translate-y-full min-w-48 hidden">
+                        <div id="user-menu" className="absolute z-30 right-0 xl:-right-5 -bottom-5 translate-y-full min-w-48 hidden">
                             <div className="bg-gray-700 flex flex-col gap-3 w-full rounded-md py-4 px-5">
                                 <Link href="/profile" className="flex gap-2 items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="fill-white" width="16" height="16" viewBox="0 0 448 512">
