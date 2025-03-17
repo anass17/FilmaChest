@@ -30,3 +30,23 @@ button[type=button] {
 ::-webkit-scrollbar-thumb {
     background-color: #FF5F2A;
 }
+
+.added-favorite {
+    animation: scale .5s backwards;
+    fill: rgb(255, 44, 44);
+    opacity: 1;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+        fill: white;
+    }
+    50% {
+        transform: scale(1.45);
+    }
+    100% {
+        transform: scale(1);
+        fill: rgb(255, 44, 44);
+    }
+}
