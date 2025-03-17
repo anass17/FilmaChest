@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller
 {
@@ -68,5 +70,19 @@ class AuthController extends Controller
         }
         
         return Inertia::render('Login', ['errors' => 'Incorrect email or password']);
+    }
+
+    // Log user out
+
+    public function logout(Request $request) {
+
+        $token = $request->cookie('auth_token');
+
+        if ($token) {
+            PersonalAccessToken::findToken($token)->delete;
+            $cookie = Cookie::forget('auth_token');
+        }
+        
+        return redirect()->route('login')->withCookie($cookie);
     }
 }

@@ -81,6 +81,10 @@ class MovieController extends Controller
     {
         $movie = Movie::with('category')->find($id);
 
+        if (!$movie) {
+            return Inertia::render('Errors/NotFound');
+        }
+
         return Inertia::render('Movie', ['movie' => $movie]);
     }
 

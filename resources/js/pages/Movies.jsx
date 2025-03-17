@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../layouts/Navbar";
 import MovieCard from "../layouts/MovieCard";
+import { usePage } from '@inertiajs/inertia-react';
 
 export default function Movies({movies, categories}) {
+    const { auth } = usePage().props;
 
     let [moviesList, setMoviesList] = useState(movies);
     let [filters, setFilters] = useState({search: '', category: ''});
