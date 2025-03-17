@@ -27,7 +27,7 @@ export default function AddMovie({errors, categories}) {
 
                 const imagePreview = document.getElementById('thumbnail-label');
                 imagePreview.style.backgroundImage = `url('${fileURL}')`;
-                imagePreview.style.height = '170px';
+                imagePreview.style.height = '250px';
                 imagePreview.textContent = '';
             };
     

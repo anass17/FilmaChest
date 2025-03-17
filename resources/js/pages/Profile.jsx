@@ -58,7 +58,7 @@ export default function AddMovie({errors, user}) {
                         </div>
                         <div className="mb-4 flex-1">
                             <label htmlFor="password" className="block text-sm font-medium text-slate-200">Password</label>
-                            <input type="text" id="password" name="password" onChange={handleChange} value={data.password} placeholder="*****" className={update == true ? "mt-1 block w-full px-3 py-2 border placeholder:text-slate-400 text-slate-200 border-gray-500 rounded bg-gray-700 shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" : 'outline-none mt-1 pl-2 text-slate-400'} disabled={update == false ? 'disabled' : ''} />
+                            <input type="password" id="password" name="password" onChange={handleChange} value={data.password} placeholder="*****" className={update == true ? "mt-1 block w-full px-3 py-2 border placeholder:text-slate-400 text-slate-200 border-gray-500 rounded bg-gray-700 shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" : 'outline-none mt-1 pl-2 text-slate-400'} disabled={update == false ? 'disabled' : ''} />
                             {errors?.password && <small className="text-red-400 block">{errors.password}</small>}
                         </div>
                         {

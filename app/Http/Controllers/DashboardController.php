@@ -43,7 +43,7 @@ class DashboardController extends Controller
         $user -> first_name = $request-> first_name;
         $user -> last_name = $request-> last_name;
 
-        if (strlen($request->password) != '') {
+        if (strlen($request->password) >= 8) {
             $user -> password = Hash::make($request-> password);
         }
 

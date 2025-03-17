@@ -3,7 +3,7 @@ import Navbar from "../layouts/Navbar";
 import SideMenu from "../layouts/SideMenu";
 import { Inertia } from "@inertiajs/inertia";
 
-export default function AddMovie({errors, movie}) {
+export default function AddMovie({errors, movie, categories}) {
 
     let [data, setData] = useState({title: movie.title, description: movie.description, category: movie.category.id, year: movie.year, country: movie.country, duration: movie.duration});
 
@@ -52,9 +52,11 @@ export default function AddMovie({errors, movie}) {
                                     <select
                                         name="category" id="category" value={data.category} onChange={handleChange} className="w-full bg-gray-700 placeholder:text-slate-300 text-slate-300 text-sm border border-gray-500 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] shadow-sm focus:shadow-md appearance-none cursor-pointer">
                                         <option value="">Select</option>
-                                        <option value="1">Action</option>
-                                        <option value="2">Fiction</option>
-                                        <option value="3">Horror</option>
+                                        {
+                                            categories.map((item, index) => {
+                                                return <option key={index} value={item.id}>{item.name}</option>
+                                            })
+                                        }
                                     </select>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.2" stroke="currentColor" className="h-5 w-5 ml-1 absolute top-2.5 right-2.5 text-gray-400">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />

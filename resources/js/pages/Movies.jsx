@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../layouts/Navbar";
 import MovieCard from "../layouts/MovieCard";
-import { usePage } from '@inertiajs/inertia-react';
 
 export default function Movies({movies, categories}) {
-    const { auth } = usePage().props;
 
     let [moviesList, setMoviesList] = useState(movies);
     let [filters, setFilters] = useState({search: '', category: ''});
@@ -54,6 +52,7 @@ export default function Movies({movies, categories}) {
                                             className="w-full *:text-gray-800 placeholder:text-slate-400 text-slate-300 text-sm border border-slate-400 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
                                             <option value="">All</option>
                                             {
+                                                categories &&
                                                 categories.map((item, index) => {
                                                     return (
                                                         <option key={index} value={item.id}>{item.name}</option>
@@ -71,6 +70,7 @@ export default function Movies({movies, categories}) {
                     </div>
                     <div className="grid grid-cols-3 gap-5">
                         {
+                            moviesList &&
                             moviesList.map((item, index) => {
                                 return (
                                     <MovieCard key={index} movie={item} />

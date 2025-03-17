@@ -93,8 +93,10 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
         $movie = Movie::with('category')->findOrFail($id);
-        return Inertia::render('EditMovie', ['movie' => $movie]);
+
+        return Inertia::render('EditMovie', ['movie' => $movie, 'categories' => $categories]);
     }
 
     /**
@@ -106,7 +108,7 @@ class MovieController extends Controller
         $request->validate([
             'title' => 'required|string|max:150',
             'description' => 'required|string|max:255',
-            'category' => 'required|string|exists:categories,id',
+            'category' => 'required|exists:categories,id',
             'year' => 'required|integer|min:1950',
             'country' => 'required|string',
             'duration' => 'required|string|regex:/^[0-9]:[0-5][0-9]$/',

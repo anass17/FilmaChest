@@ -9,7 +9,9 @@ export default function MovieCardAdminView({movie}) {
 
         setShowModal(false);
 
-        Inertia.delete('/movies/' + movie.id);
+        Inertia.visit('/movies/' + movie.id, {
+            method: 'DELETE'
+        });
     }
 
     return (

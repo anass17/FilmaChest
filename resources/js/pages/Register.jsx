@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react"
 import { Inertia } from '@inertiajs/inertia';
 import { Link } from "@inertiajs/inertia-react";
@@ -6,6 +6,7 @@ import { Link } from "@inertiajs/inertia-react";
 export default function Register({errors}) {
 
     let [data, setData] = useState({first_name: '', last_name: '', email: '', password: '', password_confirmation: ''})
+    let [formErrors, setFormErrors] = useState(errors)
 
     function handleChange(e) {
         let {value, name} = e.target;
@@ -16,10 +17,37 @@ export default function Register({errors}) {
         })
     }
 
+    useEffect(() => {
+        setFormErrors(errors);
+    }, [errors])
+
     function handleSubmit(e) {
         e.preventDefault();
 
-        Inertia.post('/register', data);
+        let checkErrors = {}
+
+        if (data.first_name.length < 2) {
+            checkErrors.first_name = 'First Name is too short'
+        }
+        if (data.last_name.length < 2) {
+            checkErrors.last_name = 'Last Name is too short'
+        }
+        if (data.email.search(/^[a-zA-Z0-9.-_]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/) < 0) {
+            checkErrors.email = 'Please enter a valid email address'
+        }
+        if (data.password.length < 8) {
+            checkErrors.password = 'Password must be at least 8 characters'
+        }
+        if (data.password_confirmation != data.password) {
+            checkErrors.password_confirmation = 'The passwords do not match.'
+        }
+
+        setFormErrors(checkErrors);
+
+        if (Object.keys(checkErrors).length === 0) {
+            Inertia.post('/register', data);
+        }
+
     }
 
     return (
@@ -30,34 +58,34 @@ export default function Register({errors}) {
                     <h1 className="text-2xl font-bold mb-8 text-center text-[#FF5F2A]">Register</h1>
                     <div className="flex gap-3">
                         <div className="flex-1">
-                            <label htmlFor="first_name" className="block text-sm font-medium">First Name</label>
-                            <input type="text" id="first_name" name="first_name" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
-                            {errors?.first_name && <small className="text-red-400">{errors.first_name}</small>}
+                            <label htmlFor="first_name" className="block text-sm font-medium text-slate-200">First Name</label>
+                            <input type="text" id="first_name" name="first_name" placeholder="Karim" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
+                            {formErrors.first_name && <small className="text-red-400">{formErrors.first_name}</small>}
                         </div>
                         <div className="flex-1">
-                            <label htmlFor="last_name" className="block text-sm font-medium">Last Name</label>
-                            <input type="text" id="last_name" name="last_name" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-500 shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
-                            {errors?.last_name && <small className="text-red-400">{errors.last_name}</small>}
+                            <label htmlFor="last_name" className="block text-sm font-medium text-slate-200">Last Name</label>
+                            <input type="text" id="last_name" name="last_name" placeholder="Youssofi" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-500 shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
+                            {formErrors.last_name && <small className="text-red-400">{formErrors.last_name}</small>}
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium">Email</label>
-                        <input type="text" id="email" name="email" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-500  focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
-                        {errors?.email && <small className="text-red-400">{errors.email}</small>}
+                        <label htmlFor="email" className="block text-sm font-medium text-slate-200">Email</label>
+                        <input type="text" id="email" name="email" placeholder="email@example.com" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-500  focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
+                        {formErrors.email && <small className="text-red-400">{formErrors.email}</small>}
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium">Password</label>
-                        <input type="password" id="password" name="password" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-500  shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
-                        {errors?.password && <small className="text-red-400">{errors.password}</small>}
+                        <label htmlFor="password" className="block text-sm font-medium text-slate-200">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter a strong email" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-500  shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
+                        {formErrors.password && <small className="text-red-400">{formErrors.password}</small>}
                     </div>
                     <div>
-                        <label htmlFor="password_confirmation" className="block text-sm font-medium">Password Confirmation</label>
-                        <input type="password" id="password_confirmation" name="password_confirmation" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border bg-gray-500  border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
-                        {errors?.password_confirmation && <small className="text-red-400">{errors.password_confirmation}</small>}
+                        <label htmlFor="password_confirmation" className="block text-sm font-medium text-slate-200">Password Confirmation</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Re-enter password" onChange={handleChange} className="mt-1 block w-full px-3 py-2 border bg-gray-500  border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
+                        {formErrors.password_confirmation && <small className="text-red-400">{formErrors.password_confirmation}</small>}
                     </div>
                     <div className="flex justify-between items-center mt-6">
-                        <button type="submit" className="w-full max-w-40 py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm cursor-pointer font-medium text-white bg-[#FC684D] hover:bg-[#FF5F2A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FC684D]">Register</button>
-                        <Link href="/login">You have an account?</Link>
+                        <button type="submit" className="w-full max-w-32 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm cursor-pointer font-medium text-white bg-[#FC684D] hover:bg-[#FF5F2A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FC684D]">Register</button>
+                        <Link href="/login" className="text-sm font-semibold">You have an account?</Link>
                     </div>
                 </form>
             </div>
