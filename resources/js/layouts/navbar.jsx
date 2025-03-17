@@ -105,8 +105,8 @@ export default function Navbar() {
                     <Link href="/movies">Movies</Link>
                     <button type="button" onClick={toggleUserMenu} className="cursor-pointer">{user.first_name} {user.last_name}</button>
                     <div className="relative">
-                        <button type="button" onClick={toggleUserMenu} id="user-profile-picture" className="cursor-pointer block w-11 h-11 bg-white rounded-full border-2 border-[#FF5F2A] overflow-hidden">
-                            <img src="" className="w-full" />
+                        <button type="button" onClick={toggleUserMenu} id="user-profile-picture" className="cursor-pointer block w-10 h-10 bg-white rounded-full border-2 border-[#FF5F2A] overflow-hidden">
+                            <img src="/imgs/user.webp" className="w-full" />
                         </button>
                         <div id="user-menu" className="absolute z-30 -right-5 -bottom-5 translate-y-full min-w-48 hidden">
                             <div className="bg-gray-700 flex flex-col gap-3 w-full rounded-md py-4 px-5">

@@ -21,7 +21,8 @@ Route::post('/register', [AuthController::class, 'register']);
 
 // User Routes
 
-Route::get('/profile', [DashboardController::class, 'index'])->middleware([authentified::class]);
+Route::get('/profile', [DashboardController::class, 'profile'])->middleware([authentified::class]);
+Route::put('/profile/update', [DashboardController::class, 'profileUpdate'])->middleware([authentified::class]);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware([authentified::class, adminAutorization::class]);
 
 // Movies Routes
