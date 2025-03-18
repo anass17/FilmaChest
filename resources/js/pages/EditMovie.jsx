@@ -31,13 +31,13 @@ export default function AddMovie({errors, movie, categories}) {
 
                 <SideMenu activeLink={3} />
                 
-                <div className="py-12 flex-1 px-10">
+                <div className="py-12 flex-1 px-4 md:px-10">
                     <h1 className="mb-2 text-4xl font-semibold text-center">Edit An Existing Movie</h1>
                     <h2 className="text-lg font-semibold text-slate-500 mb-8 text-center">Movie: {movie.title}</h2>
                     <form  onSubmit={handleSubmit} className="mx-auto max-w-xl">
                         <div className="mb-3">
                             <label htmlFor="title" className="block text-sm font-medium">Title</label>
-                            <input type="text" id="title" name="title" value={data.title} onChange={handleChange} placeholder="Add Movie Title" className="mt-1 block w-full px-3 py-2 border placeholder:text-slate-400 text-slate-200 border-gray-500 rounded bg-gray-700 shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
+                            <input type="text" id="title" name="title" value={data.title} onChange={handleChange} placeholder="Add Movie Title" className="mt-1 block w-full px-3 py-2 border placeholder:text-slate-400 text-slate-200 bg-[#314158] rounded border-slate-500 shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
                             {errors?.title && <small className="text-red-400">{errors.title}</small>}
                         </div>
                         <div className="mb-3">
@@ -50,7 +50,7 @@ export default function AddMovie({errors, movie, categories}) {
                                 <label htmlFor="category" className="block text-sm font-medium mb-1">Category</label>
                                 <div className="relative">
                                     <select
-                                        name="category" id="category" value={data.category} onChange={handleChange} className="w-full bg-gray-700 placeholder:text-slate-300 text-slate-300 text-sm border border-gray-500 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] shadow-sm focus:shadow-md appearance-none cursor-pointer">
+                                        name="category" id="category" value={data.category} onChange={handleChange} className="w-full bg-[#314158] placeholder:text-slate-400 text-slate-300 text-sm border border-gray-500 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] shadow-sm focus:shadow-md appearance-none cursor-pointer">
                                         <option value="">Select</option>
                                         {
                                             categories.map((item, index) => {
@@ -66,7 +66,7 @@ export default function AddMovie({errors, movie, categories}) {
                             </div>
                             <div className="flex-1">
                                 <label htmlFor="year" className="block text-sm font-medium">Release Year</label>
-                                <input type="text" id="year" name="year" value={data.year} onChange={handleChange} placeholder="Format: 2025" className="mt-1 block w-full px-3 py-2 border border-gray-500 rounded bg-gray-700  shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
+                                <input type="text" id="year" name="year" value={data.year} onChange={handleChange} placeholder="Format: 2025" className="mt-1 block w-full px-3 py-2 border bg-[#314158] placeholder:text-slate-400 border-slate-500  shadow-sm rounded focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
                                 {errors?.year && <small className="text-red-400">{errors.year}</small>}
                             </div>
                         </div>
@@ -75,7 +75,7 @@ export default function AddMovie({errors, movie, categories}) {
                                 <label htmlFor="country" className="block text-sm font-medium mb-1">Country</label>
                                 <div className="relative">
                                     <select
-                                        name="country" id="country" onChange={handleChange} value={data.country} className="w-full bg-gray-700 placeholder:text-slate-300 text-slate-300 text-sm border border-gray-500 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] shadow-sm focus:shadow-md appearance-none cursor-pointer">
+                                        name="country" id="country" onChange={handleChange} value={data.country} className="w-full bg-[#314158] placeholder:text-slate-400 text-slate-300 text-sm border border-gray-500 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] shadow-sm focus:shadow-md appearance-none cursor-pointer">
                                         <option value="">Select</option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Argentina">Argentina</option>
@@ -116,13 +116,13 @@ export default function AddMovie({errors, movie, categories}) {
                             </div>
                             <div className="flex-1">
                                 <label htmlFor="duration" className="block text-sm font-medium">Duration</label>
-                                <input type="text" id="duration" name="duration" value={data.duration} onChange={handleChange} placeholder="Format: 3:40" className="mt-1 block w-full px-3 py-2 border border-gray-500 rounded bg-gray-700  shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
+                                <input type="text" id="duration" name="duration" value={data.duration} onChange={handleChange} placeholder="Format: 3:40" className="mt-1 block w-full px-3 py-2 border rounded bg-[#314158] placeholder:text-slate-400 border-slate-500  shadow-sm focus:outline-none focus:ring-[#FC684D] focus:border-[#FC684D] sm:text-sm" />
                                 {errors?.duration && <small className="text-red-400">{errors.duration}</small>}
                             </div>
                         </div>
                         <div className="mt-5">
                             <div className="mb-3">
-                                <div className="h-[200px] rounded bg-cover bg-center" style={{backgroundImage: `url('/storage/uploads/${movie.thumbnail}')`}}>
+                                <div className="h-[250px] rounded bg-cover bg-center" style={{backgroundImage: `url('/storage/uploads/${movie.thumbnail}')`}}>
                                 </div>
                             </div>
                         </div>
